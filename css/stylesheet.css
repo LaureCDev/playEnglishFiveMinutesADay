@@ -1,0 +1,170 @@
+  /* colors */
+    /* Bleu navy lumineux : #13005A */
+    /* Bleu moyen : #00337C */
+    /* Bleu canard clair : #1C82AD */
+    /* Vert menthe tendre : #03C988 */
+    /* Black : #000000 */
+    /* White : #FFFFFF */
+
+
+  html
+  {
+    font-family: 'Merriweather', serif;
+    font-size: 1.1em;
+  }
+
+  body
+  {
+    width: 50%;
+    max-width: 800px;
+    min-width: 480px;
+    margin: 0 auto;
+    color: #000000;
+    background-color: #ffffff; /* white */
+    color: #000000;
+  }
+
+  #wrapper
+  {
+    width: 80%;
+    background-color: #ffffff; /* black */
+    border: 2px 2px #1C82aAD; /* bleu pétrole terne */
+    height: 100%;
+  }
+
+  .card
+  {
+  margin-top: 150px;
+  padding: 40px;
+  background-color: #FFFFFF;/* white */
+  border-radius: 5px;
+  box-shadow: 0 15px 35px rgba(0, 51, 124,0.5); /* bleu moyen */
+  }
+
+  .form input[type="number"]
+  {
+    width: 200px;
+  }
+
+  .lastResult
+  {
+    color: #FFFFFF; /* white */
+    padding: 10px;
+    font-family: 'Merriweather', serif;
+    font-size: 1em;
+    font-weight: bold;
+
+  }
+
+  h1
+  {
+    color: #00337C; /*  bleu moyen */
+  text-align: center;
+  font-family: 'Righteous', cursive;
+  font-size: 1.6em;
+  font-style: bold;
+  letter-spacing: 1.2;
+  }
+
+  h2
+  {
+    color : #1C82AD;
+    font-size: 1.3em;
+    text-align: center;
+    padding-bottom: 20px;
+    opacity: 0.8;
+    font-family: 'Merriweather', serif;
+  }
+
+  h3{
+    color: #00337c;
+    font-size: 1.4em;
+    text-align: left;
+    font-weight: bold;
+    font-family: 'Acme', sans-serif;
+    text-shadow: 1px 2px 1px #ffffff;
+    letter-spacing: 1.1;
+  }
+
+  .text {
+    color: #000000;
+    text-align: left;
+    font-size: 1.1em;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+
+
+  .disappear{
+    display: none;
+  }
+
+.appear {
+  display: block;
+}
+
+.guessSubmit, #guessSubmit1, #guessSubmit2, #guessSubmit3, #guessSubmit4, #guessSubmit5, #guessSubmit6, #guessSubmit7, #guessSubmit8, #guessSubmit9, #guessSubmit10 {
+  margin-top: 30px;
+  padding: 10px;
+  box-shadow: 5px 6px 5px #19A7CE;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 2px solid rgba(25,167,206,0.8);
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.guessField {
+  padding: 10px;
+  box-shadow: 5px 6px 5px rgba(19,0,90,0.8);
+  border-radius: 5px;
+  background-color: #1C82AD;
+  color: #FFFFFF;
+  border: 3px solid rgba(25,167,206,0.8);
+  font-weight: 600;
+  font-size: 1em;
+}
+
+/* objectif mettre les réponses automatiquement en lowercase comme la réponse attendue mais après le résultat même juste est considéré faux... */
+/*input{
+  text-transform: lowercase;
+}*/
+
+.underline {
+  text-decoration: underline;
+}
+
+.hint {
+  font-style : oblique;
+}
+
+.restartGame {
+  margin-top: 30px;
+  padding: 10px;
+  box-shadow: 5px 6px 5px #19A7CE;
+  border-radius: 5px;
+  background-color: #03C988;
+  color: #FFFFFF;
+  border: 2px solid rgba(25,167,206,0.8);
+  font-weight: 600;
+  font-size: 1.1em;
+  text-transform: uppercase;
+}
+
+.resetGame {
+  margin-top: 30px;
+  padding: 10px;
+  box-shadow: 5px 6px 5px #1c82ad;
+  border-radius: 5px;
+  background-color: #00337C;
+  color: #FFFFFF;
+  border: 2px solid #13005A;
+  font-weight: 600;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 1.2;
+}

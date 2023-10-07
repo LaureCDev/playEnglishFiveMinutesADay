@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Play English Five Minutes A Day</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Lobster&family=Merriweather&family=Righteous&family=Tsukimi+Rounded:wght@700&display=swap" rel="stylesheet">
+   
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <div class="card">
+        <h1>Play English Five Minutes A Day</h1>
+        <h2> Time to brush up your English vocabulary!</h2>
+
+        <div class="form">
+          <h3> Question
+            <span class="tour">
+              <script type="text/javascript">
+               document.querySelector(".tour").innerHTML=1;
+             </script>
+            </span>
+          </h3>
+
+          <p class="text bold"> Find a synonym for the following word :
+            <span class="question"></span>
+          </p>
+          <p class="hint"> Hint: <span class="hint"></span>
+            <script type="text/javascript">
+              let hint = document.querySelector('.hint');
+            </script>
+          </p>
+
+          <p> <label for="guessField">Enter a guess:  </label>
+          <input type="text" required id="guessField" class="guessField"/> </p>
+          <input type="submit" value="Submit your answer Q1" class="guessSubmit appear" id="guessSubmit1"/>
+          <input type="submit" value="Submit your answer Q2" class="guessSubmit disappear" id="guessSubmit2"/>
+          <input type="submit" value="Submit your answer Q3" class="guessSubmit disappear" id="guessSubmit3"/>
+          <input type="submit" value="Submit your answer Q4" class="guessSubmit disappear" id="guessSubmit4"/>
+          <input type="submit" value="Submit your answer Q5" class="guessSubmit disappear" id="guessSubmit5"/>
+          <input type="submit" value="Submit your answer Q6" class="guessSubmit disappear" id="guessSubmit6"/>
+          <input type="submit" value="Submit your answer Q7" class="guessSubmit disappear" id="guessSubmit7"/>
+          <input type="submit" value="Submit your answer Q8" class="guessSubmit disappear" id="guessSubmit8"/>
+          <input type="submit" value="Submit your answer Q9" class="guessSubmit disappear" id="guessSubmit9"/>
+          <input type="submit" value="Submit your answer Q10" class="guessSubmit disappear" id="guessSubmit10"/>
+        </div>
+
+        <div class="resultParas">
+          <p class="guesses"></p> <!--  champs guesses = nombre indiqué par l'utilisateur, 10 fois -->
+          <p class="lastResult"></p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+	
+	/* Création des élements généraux nécessaire au démarrage du jeu */
+	
+      // hint giving some clue to the player
+        hint.innerText="You should find a five letter word starting with a 'B'";
+
+        // création d'une variable qui contiendra le premier mot dont il faudra trouver le synonyme
+        document.querySelector(".question").innerText="smart";
+
+        /* réponses saisies précédemment par l'utilisateur */
+        const guesses = document.querySelector('.guesses');
+       /* dernier essai */
+
+        let lastResult = document.querySelector('.lastResult');
+
+        /* The next two constants store references to the form text input and submit button and are used to control submitting the guess later on. */
+        let guessSubmit1 = document.querySelector('#guessSubmit1');
+        let guessSubmit2 = document.querySelector('#guessSubmit2');
+    		let guessSubmit3 = document.querySelector('#guessSubmit3');
+    		let guessSubmit4 = document.querySelector('#guessSubmit4');
+    		let guessSubmit5 = document.querySelector('#guessSubmit5');
+    		let guessSubmit6 = document.querySelector('#guessSubmit6');
+    		let guessSubmit7 = document.querySelector('#guessSubmit7');
+    		let guessSubmit8 = document.querySelector('#guessSubmit8');
+    		let guessSubmit9 = document.querySelector('#guessSubmit9');
+    		let guessSubmit10 = document.querySelector('#guessSubmit10');
+
+        let guessField = document.querySelector('.guessField'); /* guessField correspond au champ nombre saisi par l'user */
+
+        /* bouton permettant de resetter les paramètres */
+        let resetButton;
+
+        // le curseur se placera automatiquement dans le champs input servant à saisir une réponse */
+        guessField.focus();
+
+
+/* fonction permettant de lancer la vérification de la réponse et un affichage en vert + apparition d'un bouton, activable au clic */
+        function checkAnswer1() {
+          const userGuess1 = guessField.value;
+          let question1 = "smart";
+          let response1 = "bright";
+
+            if (userGuess1 === response1) {
+              lastResult.textContent = "Bravo! Are you ready for the next question?";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              launchQuestion2Button = document.createElement('button');
+              launchQuestion2Button.textContent = "Let's go!";
+              launchQuestion2Button.classList.add("resetGame");
+              document.body.append(launchQuestion2Button);
+              launchQuestion2Button.addEventListener('click',cleanUpAndResetParasFunction1);
+            } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGameQ1();
+            }
+        }
+
+        guessSubmit1.addEventListener('click', checkAnswer1);
+
+        function cleanUp1() {
+         lastResult.textContent= "";
+         lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas1() {
+          document.querySelector(".tour").innerText=2;
+          document.querySelector(".question").innerHTML="lovely";
+          hint.innerText="You should find a nine letter word starting with a 'E'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit1.disabled = false;
+          guessField.focus();
+          launchQuestion2Button.className="disappear";
+        }
+
+        function submitButtonQuestion2Appear() {
+          guessSubmit1.className ="disappear";
+          guessSubmit2.className = "appear";
+          guessSubmit2.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction1() {
+          cleanUp1();
+          resetParas1();
+          submitButtonQuestion2Appear();
+        }
+
+
+        function checkAnswer2() {
+           document.querySelector(".question").innerText="";
+           guessSubmit2 = document.querySelector('#guessSubmit2');
+           const userGuess2 = guessField.value;
+           const response2 = "enjoyable";
+
+            if(userGuess2 === response2) {
+              lastResult.textContent = "Good answer! Should we continue?";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.disabled = true;
+              launchQuestion3Button = document.createElement('button');
+              launchQuestion3Button.classList.add("resetGame");
+              launchQuestion3Button.textContent = "Ok";
+              document.body.append(launchQuestion3Button);
+              launchQuestion3Button.addEventListener('click', cleanUpAndResetParasFunction2);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGameQ2();
+          }
+        }
+
+          guessSubmit2.addEventListener('click', checkAnswer2);
+
+
+// QUESTION 3
+
+         function cleanUp2() {
+          lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas2() {
+          document.querySelector(".tour").innerText=3;
+          document.querySelector(".question").innerHTML = "fragile";
+          hint.innerText="You should find a nine letter word starting with a 'B'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit1.disabled = false;
+          guessField.focus();
+          launchQuestion3Button.className = "disappear";
+        }
+
+        function submitButtonQuestion3Appear() {
+          guessSubmit2.className ="disappear";
+          guessSubmit3.className = "appear";
+          guessSubmit3.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction2() {
+          cleanUp2();
+          resetParas2();
+          submitButtonQuestion3Appear();
+        }
+
+
+          function checkAnswer3() {
+           document.querySelector(".question").innerText="fragile";
+           guessSubmit3 = document.querySelector('#guessSubmit3');
+           const userGuess3 = guessField.value;
+           const response3 = "breakable";
+
+            if(userGuess3 === response3) {
+              lastResult.textContent = "Well done";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.disabled = true;
+              launchQuestion4Button = document.createElement('button');
+              launchQuestion4Button.classList.add("resetGame");
+              launchQuestion4Button.textContent = "Click to go on";
+              document.body.append(launchQuestion4Button);
+              launchQuestion4Button.addEventListener('click', cleanUpAndResetParasFunction3);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGameQ3();
+          }
+        }
+
+              guessSubmit3.addEventListener('click', checkAnswer3);
+
+
+
+// QUESTION 4
+         function cleanUp3() {
+          lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas3() {
+          document.querySelector(".tour").innerText=4;
+          document.querySelector(".question").innerHTML = "sullied";
+          hint.innerText="You should find a five letter word containing a 'T'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit2.disabled = false;
+          guessField.focus();
+          launchQuestion4Button.className = "disappear";
+        }
+
+        function submitButtonQuestion4Appear() {
+          guessSubmit3.className ="disappear";
+          guessSubmit4.className = "appear";
+          guessSubmit4.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction3() {
+          cleanUp3();
+          resetParas3();
+          submitButtonQuestion4Appear();
+        }
+
+
+          function checkAnswer4() {
+           document.querySelector(".question").innerText="sullied";
+           guessSubmit4 = document.querySelector('#guessSubmit4');
+           const userGuess4 = guessField.value;
+           const response4 = "dirty";
+
+            if(userGuess4 === response4) {
+              lastResult.textContent = "You were right!";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.disabled = true;
+              launchQuestion5Button = document.createElement('button');
+              launchQuestion5Button.classList.add("resetGame");
+              launchQuestion5Button.textContent = "Click to pursue";
+              document.body.append(launchQuestion5Button);
+              launchQuestion5Button.addEventListener('click', cleanUpAndResetParasFunction4);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGame();
+          }
+        }
+
+              guessSubmit4.addEventListener('click', checkAnswer4);
+
+// QUESTION 5
+         function cleanUp4() {
+          lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas4() {
+          document.querySelector(".tour").innerText=5;
+          document.querySelector(".question").innerHTML = "increase";
+          hint.innerText="You should find a small word containing 'S'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit3.disabled = false;
+          guessField.focus();
+          launchQuestion5Button.className = "disappear";
+        }
+
+        function submitButtonQuestion5Appear() {
+          guessSubmit4.className = "disappear";
+          guessSubmit5.className = "appear";
+          guessSubmit5.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction4() {
+          cleanUp4();
+          resetParas4();
+          submitButtonQuestion5Appear();
+        }
+
+
+          function checkAnswer5() {
+           document.querySelector(".question").innerText="increase";
+           guessSubmit5 = document.querySelector('#guessSubmit5');
+           const userGuess5 = guessField.value;
+           const response5 = "rise";
+
+            if(userGuess5 === response5) {
+              lastResult.textContent = "Good answer";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.disabled = true;
+              launchQuestion6Button = document.createElement('button');
+              launchQuestion6Button.classList.add("resetGame");
+              launchQuestion6Button.textContent = "Click to continue";
+              document.body.append(launchQuestion6Button);
+              launchQuestion6Button.addEventListener('click', cleanUpAndResetParasFunction5);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGame();
+          }
+        }
+
+              guessSubmit5.addEventListener('click', checkAnswer5);
+
+// QUESTION 6
+         function cleanUp5() {
+          lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas5() {
+          document.querySelector(".tour").innerText=6;
+          document.querySelector(".question").innerHTML = "garbage";
+          hint.innerText="You should find a five letter word containing a 'T'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit5.disabled = false;
+          guessField.focus();
+          launchQuestion6Button.className = "disappear";
+        }
+
+        function submitButtonQuestion6Appear() {
+          guessSubmit5.className = "disappear";
+          guessSubmit6.className = "appear";
+          guessSubmit6.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction5() {
+          cleanUp5();
+          resetParas5();
+          submitButtonQuestion6Appear();
+        }
+
+
+          function checkAnswer6() {
+           document.querySelector(".question").innerText="garbage";
+           guessSubmit6 = document.querySelector('#guessSubmit6');
+           const userGuess6 = guessField.value;
+           const response6 = "waste";
+
+            if(userGuess6 === response6) {
+              lastResult.textContent = "Perfect!";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.disabled = true;
+              launchQuestion7Button = document.createElement('button');
+              launchQuestion7Button.classList.add("resetGame");
+              launchQuestion7Button.textContent = "Not afraid to continue?";
+              document.body.append(launchQuestion7Button);
+              launchQuestion7Button.addEventListener('click', cleanUpAndResetParasFunction6);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGame();
+          }
+        }
+
+              guessSubmit6.addEventListener('click', checkAnswer6);
+
+// QUESTION 7
+         function cleanUp6() {
+         lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas6() {
+          document.querySelector(".tour").innerText=7;
+          document.querySelector(".question").innerHTML = "behavior";
+          hint.innerText="You should find a nine letter word";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit6.disabled = false;
+          guessField.focus();
+          launchQuestion7Button.className = "disappear";
+        }
+
+        function submitButtonQuestion7Appear() {
+          guessSubmit6.className = "disappear";
+          guessSubmit7.className = "appear";
+          guessSubmit7.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction6() {
+          cleanUp6();
+          resetParas6();
+          submitButtonQuestion7Appear();
+        }
+
+
+          function checkAnswer7() {
+           document.querySelector(".question").innerText="behavior";
+           guessSubmit7 = document.querySelector('#guessSubmit7');
+           const userGuess7 = guessField.value;
+           const response7 = "behaviour";
+
+            if(userGuess7 === response7) {
+              lastResult.textContent = "Great!";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.disabled = true;
+              launchQuestion8Button = document.createElement('button');
+              launchQuestion8Button.classList.add("resetGame");
+              launchQuestion8Button.textContent = "Still there?";
+              document.body.append(launchQuestion8Button);
+              launchQuestion8Button.addEventListener('click', cleanUpAndResetParasFunction7);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGame();
+          }
+        }
+
+              guessSubmit7.addEventListener('click', checkAnswer7);
+
+// QUESTION 8
+         function cleanUp7() {
+         lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas7() {
+          document.querySelector(".tour").innerText=8;
+          document.querySelector(".question").innerHTML = "expertise";
+          hint.innerText="You should find a seven letter word starting with a 'M'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit7.disabled = false;
+          guessField.focus();
+          launchQuestion8Button.className = "disappear";
+        }
+
+        function submitButtonQuestion8Appear() {
+          guessSubmit7.className = "disappear";
+          guessSubmit8.className = "appear";
+          guessSubmit8.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction7() {
+          cleanUp7();
+          resetParas7();
+          submitButtonQuestion8Appear();
+        }
+
+
+          function checkAnswer8() {
+           document.querySelector(".question").innerText="expertise";
+           guessSubmit8 = document.querySelector('#guessSubmit8');
+           const userGuess8 = guessField.value;
+           const response8 = "mastery";
+
+            if(userGuess8 === response8) {
+              lastResult.textContent = "Indeed!";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.disabled = true;
+              launchQuestion9Button = document.createElement('button');
+              launchQuestion9Button.classList.add("resetGame");
+              launchQuestion9Button.textContent = "Almost there!";
+              document.body.append(launchQuestion9Button);
+              launchQuestion9Button.addEventListener('click', cleanUpAndResetParasFunction8);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGame();
+          }
+        }
+
+              guessSubmit8.addEventListener('click', checkAnswer8);
+
+
+// QUESTION 9
+         function cleanUp8() {
+        lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas8() {
+          document.querySelector(".tour").innerText=9;
+          document.querySelector(".question").innerHTML = "imagine";
+          hint.innerText="You should find a seven letter word";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit8.disabled = false;
+          guessField.focus();
+          launchQuestion9Button.className = "disappear";
+        }
+
+        function submitButtonQuestion9Appear() {
+          guessSubmit8.className = "disappear";
+          guessSubmit9.className = "appear";
+          guessSubmit9.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction8() {
+          cleanUp8();
+          resetParas8();
+          submitButtonQuestion9Appear();
+        }
+
+
+          function checkAnswer9() {
+           document.querySelector(".question").innerText = "imagine";
+           guessSubmit9 = document.querySelector('#guessSubmit9');
+           const userGuess9 = guessField.value;
+           const response9 = "picture";
+
+            if(userGuess9 === response9) {
+              lastResult.textContent = "Only one more right answer to win!";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.disabled = true;
+              launchQuestion10Button = document.createElement('button');
+              launchQuestion10Button.classList.add("resetGame");
+              launchQuestion10Button.textContent = "Almost there!";
+              document.body.append(launchQuestion10Button);
+              launchQuestion10Button.addEventListener('click', cleanUpAndResetParasFunction9);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGame();
+          }
+        }
+
+              guessSubmit9.addEventListener('click', checkAnswer9);
+
+
+// QUESTION 10 --- LAST ONE ---
+         function cleanUp9() {
+          lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas9() {
+          document.querySelector(".tour").innerText=10;
+          document.querySelector(".question").innerHTML = "forebear";
+          hint.innerText="You should find an eight letter word starting with an'A'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit9.disabled = false;
+          guessField.focus();
+          launchQuestion10Button.className = "disappear";
+        }
+
+        function submitButtonQuestion10Appear() {
+          guessSubmit9.className = "disappear";
+          guessSubmit10.className = "appear";
+          guessSubmit10.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction9() {
+          cleanUp9();
+          resetParas9();
+          submitButtonQuestion10Appear();
+        }
+
+
+          function checkAnswer10() {
+           document.querySelector(".question").innerText = "forebear";
+           guessSubmit10 = document.querySelector('#guessSubmit10');
+           const userGuess10 = guessField.value;
+           const response10 = "ancestry";
+
+            if(userGuess10 === response10) {
+              lastResult.textContent = "Congratulations! You won the game!";
+              lastResult.style.backgroundColor = '#03c088';
+              guessField.disabled = true;
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit10.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGame();
+          }
+        }
+
+              guessSubmit10.addEventListener('click', checkAnswer10);
+
+
+// PERDU A LA QUESTION 1
+
+// créé un bouton pour redémarrer le jeu - ceci apparait automatiquement en cas de mauvaise réponse
+          function buttonCreationStartANewGameQ1() {
+            restartQ1Button = document.createElement('button');
+            restartQ1Button.textContent = 'Reset the game';
+            restartQ1Button.classList.add('resetGame');
+            document.body.append(restartQ1Button);
+            restartQ1Button.addEventListener('click', startANewGameQ1);
+         }
+
+// fonction startANewGame qui appelera au clic sur le bouton startANewGame deux fonctions :
+         // nettoyage et réactivation des champs input et answer
+         // remise à zéro du tour, question et réponse attendue, hint,  possibilité de jouer
+
+// Nettoyage après une fin de partie
+          function cleanUpBeforeStartingANewGameQ1() {
+             restartQ1Button.classList="disappear";
+             guessField.disabled = true;
+             guessSubmit1.disabled = true; // attention ici pas prévu submit2...
+             lastResult.textContent = "";
+             lastResult.style.backgroundColor ="white";
+             lastResult.style.color = "black";
+             lastResult.style.fontWeight = "normal";
+             lastResult.style.fontSize = "14px";
+             lastResult.style.backgroundColor = 'white';
+             lastResult.style.fontWeight = "bold";
+             lastResult.style.textShadow = "0px 0px #000000";
+             guessField.focus();
+          }
+
+          function resetParasBeforeRestartingQ1() {
+               // hint giving some clue to the player
+                hint.innerText="You should find a five letter word starting with a 'B'";
+
+                // création d'une variable qui contiendra le premier mot dont il faudra trouver le synonyme
+                document.querySelector(".question").innerText="smart";
+
+                /* réponses saisies précédemment par l'utilisateur */
+                const guesses = document.querySelector('.guesses');
+               /* dernier essai */
+
+                let lastResult = document.querySelector('.lastResult');
+
+                /* The next two constants store references to the form text input and submit button and are used to control submitting the guess later on. */
+                let guessSubmit1 = document.querySelector('#guessSubmit1');
+                let guessSubmit2 = document.querySelector('#guessSubmit2');
+                let guessField = document.querySelector('.guessField'); /* guessField correspond au champ nombre saisi par l'user */
+
+                /* bouton permettant de resetter les paramètres */
+                let resetButton;
+
+                // le curseur se placera automatiquement dans le champs input servant à saisir une réponse */
+                guessField.focus();
+            }
+
+            // vise à supprimer le bouton RESTART THE GAME + rendre actifs le champs réponse + submit + lancer le jeu
+             function restartTheGame() {
+              reLaunchGameQ1.style.display="none";
+              guessField.disabled = false;
+              guessSubmit1.disabled = false;
+              guessField.focus();
+            }
+
+              function buttonReLaunchGameQ1() {
+              // supprimer le bouton restart the game
+              reLaunchGameQ1= document.createElement('button');
+              reLaunchGameQ1.textContent = "RESTART THE GAME";
+              reLaunchGameQ1.classList.add('restartGame');
+              document.body.append(reLaunchGameQ1);
+              reLaunchGameQ1.addEventListener('click', restartTheGame);
+            }
+
+        // quand on perd, la fonction buttonCreationStartANewGameQ1() est lancée pour faire apparaitre le bouton Reset the Game
+        // puis quand on clique dessus, on lance la fonction startANewGameQ1()
+        // Cette fonction lancera trois fonctions :
+            // - cleanUpBeforeStartingANewGameQ1() puis
+            // - resetParasBeforeRestaringQ1() puis
+            // - buttonReLaunchGameQ1()
+            // le jeu redémarre alors si on perd à la question 1
+        function startANewGameQ1() {
+          cleanUpBeforeStartingANewGameQ1();
+          resetParasBeforeRestartingQ1();
+          buttonReLaunchGameQ1();
+        }
+
+////////////////////// PERDU A LA QUESTION 2 //////////////
+
+        // PERDU A LA QUESTION 2
+
+// créé un bouton pour redémarrer le jeu - ceci apparait automatiquement en cas de mauvaise réponse
+          function buttonCreationStartANewGameQ2() {
+            let guessField = document.querySelector('.guessField'); /* guessField correspond au champ nombre saisi par l'user */
+    			  let guessSubmit1 = document.querySelector('#guessSubmit1');
+    		    let guessSubmit2 = document.querySelector('#guessSubmit2');
+    			  restartQ2Button = document.createElement('button');
+            restartQ2Button.textContent = 'Reset the game';
+            restartQ2Button.classList.add('resetGame');
+            document.body.append(restartQ2Button);
+            restartQ2Button.addEventListener("click", () => {
+			//entrer ici tout ce qui doit se faire
+				    let guessField = document.querySelector('.guessField'); /* guessField correspond au champ nombre saisi par l'user */
+				    let guessSubmit1 = document.querySelector('#guessSubmit1');
+		        let guessSubmit2 = document.querySelector('#guessSubmit2');
+    				 restartQ2Button.classList.add('disappear');
+    				 guessField.disabled = true;
+    				 guessSubmit2.style.display="none";
+    				 guessSubmit1.style.display="block";
+    				 let lastResult = document.querySelector('.lastResult');
+    				 lastResult.textContent = "";
+    				 lastResult.style.backgroundColor ="white";
+    				 lastResult.style.color = "black";
+    				 lastResult.style.fontWeight = "normal";
+    				 lastResult.style.fontSize = "14px";
+    				 lastResult.style.backgroundColor = 'white';
+    				 lastResult.style.fontWeight = "bold";
+    				 lastResult.style.textShadow = "0px 0px #000000";
+				 // hint giving some clue to the player
+                hint.innerText="You should find a five letter word starting with a 'B'";
+                // création d'une variable qui contiendra le premier mot dont il faudra trouver le synonyme
+                document.querySelector(".question").innerText="smart";
+                /* réponses saisies précédemment par l'utilisateur */
+                const guesses = document.querySelector('.guesses');
+               /* dernier essai */
+
+                /* The next two constants store references to the form text input and submit button and are used to control submitting the guess later on. */
+               /* let guessSubmit1 = document.querySelector('#guessSubmit1');*/
+                let question1 = "smart";
+                let response1 = "bright";
+                document.querySelector(".tour").innerText=1;
+                /* bouton permettant de resetter les paramètres */
+                let resetButton;
+			         	guessField.disabled=false;
+				        guessSubmit1.disabled=false;
+                // le curseur se placera automatiquement dans le champs input servant à saisir une réponse */
+                guessField.focus();
+				         const userGuess1 = guessField.value;
+				// ici il faut prévoir qu'au clic sur submit, la fonction 1 soit relancée
+					if (userGuess1 === response1) {
+				  	  lastResult.textContent = "Bravo! Are you ready for the next question?";
+					    lastResult.style.backgroundColor = '#03c088';
+  					  lastResult.style.color = 'white';
+  					  guessField.value =" ";
+  					  guessField.disabled = true;
+  					  guessSubmit1.disabled = true;
+  					  launchQuestion2Button = document.createElement('button');
+  					  launchQuestion2Button.textContent = "Let's go!";
+  					  launchQuestion2Button.classList.add("resetGame");
+  					  document.body.append(launchQuestion2Button);
+  					  launchQuestion2Button.addEventListener('click',cleanUpAndResetParasFunction1);
+				} else {
+  					  lastResult.textContent = "The game is over";
+  					  lastResult.style.backgroundColor ="white";
+  					  lastResult.style.color = "red";
+  					  lastResult.style.fontWeight = "bold";
+  					  lastResult.style.fontSize = "20px";
+  					  lastResult.style.textShadow = "1px 3px #F6F1F1";
+  					  guessField.disabled = true;
+  					  guessSubmit1.disabled = true;
+  					  guessField.value = "";
+  					  buttonCreationStartANewGameQ1();
+					}
+				})
+			};
+			
+			guessSubmit1.addEventListener('click', checkAnswer1);
+
+        function cleanUp1() {
+         lastResult.textContent= "";
+         lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas1() {
+          document.querySelector(".tour").innerText=2;
+          document.querySelector(".question").innerHTML="lovely";
+          hint.innerText="You should find a nine letter word starting with a 'E'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit1.style.display="none";
+		      guessSubmit2.style.display="block";
+		      guessSubmit2.disabled = false;
+          guessField.focus();
+          launchQuestion2Button.className="disappear";
+        }
+
+        function submitButtonQuestion2Appear() {
+          guessSubmit1.className ="disappear";
+          guessSubmit2.className = "appear";
+          guessSubmit2.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction1() {
+          cleanUp1();
+          resetParas1();
+          submitButtonQuestion2Appear();
+        }
+
+				
+	  
+        function checkAnswer2() {
+           
+		   document.querySelector(".question").innerText="";
+           guessSubmit2 = document.querySelector('#guessSubmit2');
+           const userGuess2 = guessField.value;
+           const response2 = "enjoyable";
+
+            if(userGuess2 === response2) {
+              lastResult.textContent = "Good answer! Should we continue?";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit2.style.display="none";
+              guessField.disabled = true;
+              launchQuestion3Button = document.createElement('button');
+              launchQuestion3Button.classList.add("resetGame");
+              launchQuestion3Button.textContent = "Ok";
+              document.body.append(launchQuestion3Button);
+              launchQuestion3Button.addEventListener('click', cleanUpAndResetParasFunction2);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGameQ2();
+          }
+        }
+
+          guessSubmit2.addEventListener('click', checkAnswer2);
+		  
+		  function cleanUp2() {
+          lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas2() {
+          document.querySelector(".tour").innerText=3;
+          document.querySelector(".question").innerHTML = "fragile";
+          hint.innerText="You should find a nine letter word starting with a 'B'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit1.disabled = false;
+          guessField.focus();
+          launchQuestion3Button.className = "disappear";
+        }
+
+        function submitButtonQuestion3Appear() {
+          guessSubmit2.className ="disappear";
+          guessSubmit3.className = "appear";
+          guessSubmit3.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction2() {
+          cleanUp2();
+          resetParas2();
+          submitButtonQuestion3Appear();
+        }
+
+
+          function checkAnswer3() {
+           document.querySelector(".question").innerText="fragile";
+		       guessSubmit3.style.display="none";
+		       guessSubmit1.disabled= false;
+           guessSubmit3 = document.querySelector('#guessSubmit3');
+           const userGuess3 = guessField.value;
+           const response3 = "breakable";
+
+            if(userGuess3 === response3) {
+              lastResult.textContent = "Well done";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit3.style.display="block";
+			        guessSubmit3.disabled = false;
+              guessField.disabled = true;
+              launchQuestion4Button = document.createElement('button');
+              launchQuestion4Button.classList.add("resetGame");
+              launchQuestion4Button.textContent = "Click to go on";
+              document.body.append(launchQuestion4Button);
+              launchQuestion4Button.addEventListener('click', cleanUpAndResetParasFunction3);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGameQ3();
+          }
+        }
+
+              guessSubmit3.addEventListener('click', checkAnswer3);
+			  
+			  
+			  
+			   function cleanUp3() {
+          lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas3() {
+          document.querySelector(".tour").innerText=4;
+          document.querySelector(".question").innerHTML = "sullied";
+          hint.innerText="You should find a five letter word containing a 'T'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit2.disabled = false;
+          guessField.focus();
+          launchQuestion4Button.className = "disappear";
+        }
+
+        function submitButtonQuestion4Appear() {
+          guessSubmit3.style.display="none";
+          guessSubmit4.className = "appear";
+          guessSubmit4.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction3() {
+          cleanUp3();
+          resetParas3();
+          submitButtonQuestion4Appear();
+        }
+
+
+          function checkAnswer4() {
+           document.querySelector(".question").innerText="sullied";
+           guessSubmit4 = document.querySelector('#guessSubmit4');
+           const userGuess4 = guessField.value;
+           const response4 = "dirty";
+
+            if(userGuess4 === response4) {
+              lastResult.textContent = "You were right!";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.disabled = true;
+              launchQuestion5Button = document.createElement('button');
+              launchQuestion5Button.classList.add("resetGame");
+              launchQuestion5Button.textContent = "Click to pursue";
+              document.body.append(launchQuestion5Button);
+              launchQuestion5Button.addEventListener('click', cleanUpAndResetParasFunction4);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGame();
+          }
+        }
+
+              guessSubmit4.addEventListener('click', checkAnswer4);
+  
+
+////////////////////// PERDU A LA QUESTION 3 //////////////
+
+        // PERDU A LA QUESTION 3
+// créé un bouton pour redémarrer le jeu - ceci apparait automatiquement en cas de mauvaise réponse
+          function buttonCreationStartANewGameQ3() {
+            let guessField = document.querySelector('.guessField'); /* guessField correspond au champ nombre saisi par l'user */
+      			let guessSubmit1 = document.querySelector('#guessSubmit1');
+            let guessSubmit2 = document.querySelector('#guessSubmit2');
+      			restartQ3Button = document.createElement('button');
+            restartQ3Button.textContent = 'Reset the game';
+            restartQ3Button.classList.add('resetGame');
+            document.body.append(restartQ3Button);
+            restartQ3Button.addEventListener("click", () => {
+			//entrer ici tout ce qui doit se faire
+			    	let guessField = document.querySelector('.guessField'); /* guessField correspond au champ nombre saisi par l'user */
+            let guessSubmit1 = document.querySelector('#guessSubmit1');
+            let guessSubmit2 = document.querySelector('#guessSubmit2');
+    				restartQ3Button.classList.add('disappear');
+    				guessField.disabled = true;
+    				guessSubmit2.style.display="none";
+    				guessSubmit1.style.display="block";
+    				let lastResult = document.querySelector('.lastResult');
+    				lastResult.textContent = "";
+    			  lastResult.style.backgroundColor ="white";
+    				lastResult.style.color = "black";
+    				lastResult.style.fontWeight = "normal";
+    				lastResult.style.fontSize = "14px";
+    				lastResult.style.backgroundColor = 'white';
+    				lastResult.style.fontWeight = "bold";
+    				lastResult.style.textShadow = "0px 0px #000000";
+				 // hint giving some clue to the player
+                hint.innerText="You should find a five letter word starting with a 'B'";
+                // création d'une variable qui contiendra le premier mot dont il faudra trouver le synonyme
+                document.querySelector(".question").innerText="smart";
+                /* réponses saisies précédemment par l'utilisateur */
+                const guesses = document.querySelector('.guesses');
+               /* dernier essai */
+
+                /* The next two constants store references to the form text input and submit button and are used to control submitting the guess later on. */
+               /* let guessSubmit1 = document.querySelector('#guessSubmit1');*/
+                let question1 = "smart";
+                let response1 = "bright";
+                document.querySelector(".tour").innerText=1;
+                /* bouton permettant de resetter les paramètres */
+                let resetButton;
+				        guessField.disabled = false;
+				        guessSubmit1.disabled = false;
+                // le curseur se placera automatiquement dans le champs input servant à saisir une réponse */
+                guessField.focus();
+				  const userGuess1 = guessField.value;
+				// ici il faut prévoir qu'au clic sur submit, la fonction 1 soit relancée
+					if (userGuess1 === response1) {
+					  lastResult.textContent = "Bravo! Are you ready for the next question?";
+					  lastResult.style.backgroundColor = '#03c088';
+					  lastResult.style.color = 'white';
+					  guessField.value =" ";
+					  guessField.disabled = true;
+					  guessSubmit1.disabled = true;
+					  launchQuestion2Button = document.createElement('button');
+					  launchQuestion2Button.textContent = "Let's go!";
+					  launchQuestion2Button.classList.add("resetGame");
+					  document.body.append(launchQuestion2Button);
+					  launchQuestion2Button.addEventListener('click',cleanUpAndResetParasFunction1);
+				} else {
+					  lastResult.textContent = "The game is over";
+					  lastResult.style.backgroundColor ="white";
+					  lastResult.style.color = "red";
+					  lastResult.style.fontWeight = "bold";
+					  lastResult.style.fontSize = "20px";
+					  lastResult.style.textShadow = "1px 3px #F6F1F1";
+					  guessField.disabled = true;
+					  guessSubmit1.disabled = true;
+					  guessField.value = "";
+					  buttonCreationStartANewGameQ1();
+					}
+				})
+			};
+			
+			guessSubmit1.addEventListener('click', checkAnswer1);
+
+        function cleanUp1() {
+         lastResult.textContent= "";
+         lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas1() {
+          document.querySelector(".tour").innerText=2;
+          document.querySelector(".question").innerHTML="lovely";
+          hint.innerText="You should find a nine letter word starting with a 'E'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit1.style.display="none";
+          guessSubmit2.style.display="block";
+          guessSubmit2.disabled = false;
+          guessField.focus();
+          launchQuestion2Button.className="disappear";
+        }
+
+        function submitButtonQuestion2Appear() {
+          guessSubmit1.className ="disappear";
+          guessSubmit2.className = "appear";
+          guessSubmit2.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction1() {
+          cleanUp1();
+          resetParas1();
+          submitButtonQuestion2Appear();
+        }
+
+
+
+        function checkAnswer2() {
+
+       document.querySelector(".question").innerText="";
+           guessSubmit2 = document.querySelector('#guessSubmit2');
+           const userGuess2 = guessField.value;
+           const response2 = "enjoyable";
+
+            if(userGuess2 === response2) {
+              lastResult.textContent = "Good answer! Should we continue?";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit2.style.display="none";
+              guessField.disabled = true;
+              launchQuestion3Button = document.createElement('button');
+              launchQuestion3Button.classList.add("resetGame");
+              launchQuestion3Button.textContent = "Ok";
+              document.body.append(launchQuestion3Button);
+              launchQuestion3Button.addEventListener('click', cleanUpAndResetParasFunction2);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGameQ2();
+          }
+        }
+
+          guessSubmit2.addEventListener('click', checkAnswer2);
+
+           function cleanUp2() {
+          lastResult.textContent= "";
+          lastResult.style.backgroundColor = "white";
+        }
+
+        function resetParas2() {
+          document.querySelector(".tour").innerText=3;
+          document.querySelector(".question").innerHTML = "fragile";
+          hint.innerText="You should find a nine letter word starting with a 'B'";
+
+          guessField.value="";
+          guessField.disabled = false;
+          guessSubmit1.disabled = false;
+          guessField.focus();
+          launchQuestion3Button.className = "disappear";
+        }
+
+        function submitButtonQuestion3Appear() {
+          guessSubmit2.className ="disappear";
+          guessSubmit3.className = "appear";
+          guessSubmit3.className = "guessSubmit";
+        }
+
+        function cleanUpAndResetParasFunction2() {
+          cleanUp2();
+          resetParas2();
+          submitButtonQuestion3Appear();
+        }
+
+
+          function checkAnswer3() {
+           document.querySelector(".question").innerText="fragile";
+           guessSubmit3.style.display="none";
+           guessSubmit1.disabled= false;
+           guessSubmit3 = document.querySelector('#guessSubmit3');
+           const userGuess3 = guessField.value;
+           const response3 = "breakable";
+
+            if(userGuess3 === response3) {
+              lastResult.textContent = "Well done";
+              lastResult.style.backgroundColor = '#03c088';
+              lastResult.style.color = 'white';
+              guessField.value =" ";
+              guessField.disabled = true;
+              guessSubmit3.style.display="block";
+              guessSubmit3.disabled = false;
+              guessField.disabled = true;
+              launchQuestion4Button = document.createElement('button');
+              launchQuestion4Button.classList.add("resetGame");
+              launchQuestion4Button.textContent = "Click to go on";
+              document.body.append(launchQuestion4Button);
+              launchQuestion4Button.addEventListener('click', cleanUpAndResetParasFunction3);
+              guessField.focus();
+           } else {
+              lastResult.textContent = "The game is over";
+              lastResult.style.backgroundColor ="white";
+              lastResult.style.color = "red";
+              lastResult.style.fontWeight = "bold";
+              lastResult.style.fontSize = "20px";
+              lastResult.style.textShadow = "1px 3px #F6F1F1";
+              guessField.disabled = true;
+              guessSubmit1.disabled = true;
+              guessField.value = "";
+              buttonCreationStartANewGameQ3();
+          }
+        }
+
+              guessSubmit3.addEventListener('click', checkAnswer3);
+
+
+
+/* Solution : bright / enjoyable / breakable / dirty / rise / waste / behaviour / mastery / picture / ancestry */
+
+    </script>
+
+      <footer>
+
+      </footer>
+
+  </div>
+  </body>
+</html>
